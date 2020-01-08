@@ -46,83 +46,77 @@ namespace dotnet_async {
     }
 
     public class PostUser {
-        public Post posts { get; set; }
-        public User users { get; set; }
+        public int userId { get; set; }
+        public int id { get; set; }
+        public string title { get; set; }
+        public string body { get; set; }
+        public User user { get; set; }
     }
 
     class Program {
         static HttpClient client = new HttpClient ();
         static void Main (string[] args) {
-            // //01.md
-            //var post = getPost().GetAwaiter().GetResult();
+            //01.md
+            // var post = getPost().GetAwaiter().GetResult();
             // foreach (var item in post)
             // {
-            //    Console.WriteLine($"title: {post.title}");
+            //    Console.WriteLine($"title: {item.title}");
             // }
 
-            // //02.md
-            //var user = getUser().GetAwaiter().GetResult();
+            //02.md
+            // var user = getUser().GetAwaiter().GetResult();
             // foreach (var item in user)
             // {
             //    Console.WriteLine($"alamat: {item.address.street}, {item.address.city}, {item.address.suite}");
             // }
 
-            // //03.md
-            //var movie = getMovie().GetAwaiter().GetResult();
+            //03.md
+            // var movie = getMovie().GetAwaiter().GetResult();
             // foreach (var item in movie.movies)
             // {
             //    Console.WriteLine($"title: {item.title} - vote: {item.vote_average}");
             // }
 
-            // //04.md
-            //var userFilter = getUser().GetAwaiter().GetResult().Where(c => c.name.Contains("le"));
+            //04.md
+            // var userFilter = getUser().GetAwaiter().GetResult().Where(c => c.name.Contains("le"));
+            // var final = JsonConvert.SerializeObject(userFilter);
+            // Console.WriteLine(final);
 
-            // //05.md
-            //var movieFilter = getMovie().GetAwaiter().GetResult().movies.Where(c => c.vote_average > 8.4);
+            //05.md
+            // var movieFilter = getMovie().GetAwaiter().GetResult().movies.Where(c => c.vote_average > 8.4);
+            // var final = JsonConvert.SerializeObject(movieFilter);
+            // Console.WriteLine(final);
 
-            // //06.md
-            //var sum = getProduct().GetAwaiter().GetResult().Sum(c => c.price);
+            //06.md
+            // var sum = getProduct().GetAwaiter().GetResult().Sum(c => c.price);
             // Console.WriteLine($"total harga: {sum}");
 
-            // //07.md
-            //var fruits = getProduct().GetAwaiter().GetResult().Where(c => c.category == "fruits");
+            //07.md
+            // var fruits = getProduct().GetAwaiter().GetResult().Where(c => c.category == "fruits");
+            // var final = JsonConvert.SerializeObject(fruits);
+            // Console.WriteLine(final);
 
-            // //08.md
-            //var pricey = getProduct().GetAwaiter().GetResult().Where(c => c.price > 70);
+            //08.md
+            // var pricey = getProduct().GetAwaiter().GetResult().Where(c => c.price > 70);
+            // var final = JsonConvert.SerializeObject(pricey);
+            // Console.WriteLine(final);
 
             //09.md
             var posts = getPost ().GetAwaiter ().GetResult ();
             var users = getUser ().GetAwaiter ().GetResult ();
-            // var UserandPost = posts.Select (e => {
-            //     var config = new MapperConfiguration (cfg =>
-            //         cfg.CreateMap<Post, PostUser> ()
-            //         .ForMember (d => d.users,
-            //             d => d.MapFrom (
-            //                 x => users.Find (user => user.id == e.userId)
-            //             )
-            //         )
-            //     );
-            //     var mapper = config.CreateMapper ();
-            //     return mapper.Map<Post, PostUser> (e);
-            // }).ToList ();
 
-            // var final = JsonConvert.SerializeObject (UserandPost);
+            var JoinUserandPost = posts.Select(e => {
+                return new PostUser() {
+                    userId = e.userId,
+                    id = e.id,
+                    title = e.title,
+                    body = e.body,
+                    user = users.Find(user => user.id == e.userId)
+                };
+            }).ToList();
 
-            // Console.WriteLine (final);
-
-            var combine = new List<PostUser> ();
-
-            foreach (var user in users) {
-                foreach (var post in posts) {
-                    PostUser userpost = new PostUser ();
-                    userpost.users = user;
-                    userpost.posts = post;
-                    combine.Add (userpost);
-                }
-            }
-
-            var hasil = JsonConvert.SerializeObject (combine);
-            Console.WriteLine (hasil);
+            var final = JsonConvert.SerializeObject(JoinUserandPost);
+            Console.WriteLine(final);
         }
 
         async static Task<List<Post>> getPost () {
