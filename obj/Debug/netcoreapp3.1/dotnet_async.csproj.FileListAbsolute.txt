@@ -1,0 +1,14 @@
+D:\dotnet_async\bin\Debug\netcoreapp3.1\dotnet_async.exe
+D:\dotnet_async\bin\Debug\netcoreapp3.1\dotnet_async.deps.json
+D:\dotnet_async\bin\Debug\netcoreapp3.1\dotnet_async.runtimeconfig.json
+D:\dotnet_async\bin\Debug\netcoreapp3.1\dotnet_async.runtimeconfig.dev.json
+D:\dotnet_async\bin\Debug\netcoreapp3.1\dotnet_async.dll
+D:\dotnet_async\bin\Debug\netcoreapp3.1\dotnet_async.pdb
+D:\dotnet_async\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+D:\dotnet_async\obj\Debug\netcoreapp3.1\dotnet_async.csprojAssemblyReference.cache
+D:\dotnet_async\obj\Debug\netcoreapp3.1\dotnet_async.AssemblyInfoInputs.cache
+D:\dotnet_async\obj\Debug\netcoreapp3.1\dotnet_async.AssemblyInfo.cs
+D:\dotnet_async\obj\Debug\netcoreapp3.1\dotnet_async.csproj.CopyComplete
+D:\dotnet_async\obj\Debug\netcoreapp3.1\dotnet_async.dll
+D:\dotnet_async\obj\Debug\netcoreapp3.1\dotnet_async.pdb
+D:\dotnet_async\bin\Debug\netcoreapp3.1\AutoMapper.dll
