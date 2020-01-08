@@ -105,17 +105,32 @@ namespace dotnet_async {
             var posts = getPost ().GetAwaiter ().GetResult ();
             var users = getUser ().GetAwaiter ().GetResult ();
 
-            var JoinUserandPost = posts.Select(e => {
-                return new PostUser() {
-                    userId = e.userId,
-                    id = e.id,
-                    title = e.title,
-                    body = e.body,
-                    user = users.Find(user => user.id == e.userId)
-                };
+            // var JoinUserandPost = posts.Select(e => {
+            //     return new PostUser() {
+            //         userId = e.userId,
+            //         id = e.id,
+            //         title = e.title,
+            //         body = e.body,
+            //         user = users.Find(user => user.id == e.userId)
+            //     };
+            // }).ToList();
+
+            var JoinUserAndPost = posts.Select(e => {
+              var config = new MapperConfiguration(cfg => 
+                  cfg.CreateMap<Post, PostUser>()
+                    .ForMember
+                    ( d => d.user, 
+                        d => d.MapFrom
+                          (
+                            x => users.Find(user => user.id == e.userId)
+                          )
+                    )
+                );
+                var mapper = config.CreateMapper();
+              return mapper.Map<Post, PostUser>(e) ;
             }).ToList();
 
-            var final = JsonConvert.SerializeObject(JoinUserandPost);
+            var final = JsonConvert.SerializeObject(JoinUserAndPost);
             Console.WriteLine(final);
         }
 
